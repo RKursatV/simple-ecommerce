@@ -1,0 +1,179 @@
+{% load static %}
+
+<!DOCTYPE html>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+  <!-- =====  BASIC PAGE NEEDS  ===== -->
+  <meta charset="utf-8">
+  <title>{% if current_category %} {{ current_category }} {% else %} All Products {% endif %} | Needful Things</title>
+  <!-- =====  SEO MATE  ===== -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="distribution" content="global">
+  <meta name="revisit-after" content="2 Days">
+  <meta name="robots" content="ALL">
+  <meta name="rating" content="8 YEARS">
+  <meta name="Language" content="en-us">
+  <meta name="GOOGLEBOT" content="NOARCHIVE">
+  <!-- =====  MOBILE SPECIFICATION  ===== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width">
+  <!-- =====  CSS  ===== -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/magnific-popup.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
+</head>
+
+<body>
+  <!-- =====  LODER  ===== -->
+  <div class="loder"></div>
+  <div class="wrapper">
+    <!-- =====  HEADER START  ===== -->
+    {% include 'header.html' %}
+    <!-- =====  HEADER END  ===== -->
+    <!-- =====  CONTAINER START  ===== -->
+    <div class="container">
+      <div class="row ">
+        <!-- =====  BANNER STRAT  ===== -->
+        <div class="col-sm-12">
+          <div class="breadcrumb ptb_20">
+            <h1>{% if current_category %} {{ current_category }} {% else %} All Products {% endif %}</h1>
+            <ul>
+              <li><a href="/index.html">Home</a></li>
+              <li class="active">{% if current_category %} {{ current_category }} {% else %} All Products {% endif %}</li>
+            </ul>
+          </div>
+        </div>
+        <!-- =====  BREADCRUMB END===== -->
+        <div id="column-left" class="col-sm-4 col-lg-3 ">
+          <div id="category-menu" class="navbar collapse in mb_40" aria-expanded="true" role="button">
+            <div class="nav-responsive">
+              <div class="heading-part">
+                <h2 class="main_title">Categories</h2>
+              </div>
+              <ul class="nav  main-navigation collapse in">
+                {% for category in categories %}
+                <li {% if category == current_category %} class="active" {% endif %}  ><a href="?category={{ category | urlencode }}">{{ category }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-8 col-lg-9 mtb_20">
+          <div class="category-page-wrapper mb_30">
+            <div class="list-grid-wrapper pull-left">
+              <div class="btn-group btn-list-grid">
+                <button type="button" id="grid-view" class="btn btn-default grid-view active"></button>
+                <button type="button" id="list-view" class="btn btn-default list-view"></button>
+              </div>
+            </div>
+            
+          </div>
+          <div class="row">
+            {% for product in products %}
+            <div class="product-layout product-grid col-md-4 col-xs-6 ">
+              <div class="item">
+                <div class="product-thumb clearfix mb_30">
+                  <div class="image product-imageblock"> <a href="product/{{ product|get_item }}"> <img data-name="product_image" src="{{ product.image }}" alt="iPod Classic" title="iPod Classic" class="img-responsive" /> <img src="{{ product.image }}" alt="iPod Classic" title="iPod Classic" class="img-responsive" /> </a>
+                    <div class="button-group text-center">
+                      <div class="wishlist"><a href="#"><span>wishlist</span></a></div>
+                      <div class="quickview"><a href="#"><span>Quick View</span></a></div>
+                      <div class="compare"><a href="#"><span>Compare</span></a></div>
+                      <div class="add-to-cart"><a href="#"><span>Add to cart</span></a></div>
+                    </div>
+                  </div>
+                  <div class="caption product-detail text-center">
+                    <h6 data-name="product_name" class="product-name mt_20"><a href="#" title="Casual Shirt With Ruffle Hem">{{ product.name }}</a></h6>
+                    <div class="rating"> 
+                      {% for i in product.ratingAvgRange %}
+                      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-1x"></i></span>
+                      {% endfor %}
+
+
+                      {% for i in product.ratingAvgRangeRemainder %}
+                      <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i><i class="fa fa-star fa-stack-x"></i></span>
+                      {% endfor %}
+                    </div>
+                    <span class="price"><span class="amount"><span class="currencySymbol">$</span>{{ product.price }}.99</span>
+                    </span>
+                    <p class="product-desc mt_20 mb_60">{{ product.description }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+      
+        </div>
+      </div>
+      
+    </div>
+    <!-- =====  CONTAINER END  ===== -->
+    <!-- =====  FOOTER START  ===== -->
+    <div class="footer">
+      <div class="footer-bottom mt_60 ptb_20">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="social_icon">
+                <ul>
+                  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="#"><i class="fa fa-google"></i></a></li>
+                  <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="copyright-part text-center">@ 2017 All Rights Reserved Darklook</div>
+            </div>
+            <div class="col-sm-4">
+              <div class="payment-icon text-right">
+                <ul>
+                  <li><i class="fa fa-cc-paypal "></i></li>
+                  <li><i class="fa fa-cc-visa"></i></li>
+                  <li><i class="fa fa-cc-discover"></i></li>
+                  <li><i class="fa fa-cc-mastercard"></i></li>
+                  <li><i class="fa fa-cc-amex"></i></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- =====  FOOTER END  ===== -->
+  </div>
+  <a id="scrollup"></a>
+  <script src="{% static 'js/jQuery_v3.1.1.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+  <script src="{% static 'js/jquery-ui.js' %}"></script>
+  <script>
+  $(function() {
+    $("#slider-range").slider({
+      range: true,
+      min: 0,
+      max: 500,
+      values: [75, 300],
+      slide: function(event, ui) {
+        $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+      }
+    });
+    $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+      " - $" + $("#slider-range").slider("values", 1));
+  });
+  </script>
+</body>
+
+</html>

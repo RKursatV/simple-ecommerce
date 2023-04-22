@@ -1,0 +1,541 @@
+{% load static %}
+
+<!DOCTYPE html>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+  <!-- =====  BASIC PAGE NEEDS  ===== -->
+  <meta charset="utf-8">
+  <title>{% if current_category %} {{ current_category }} {% else %} All Products {% endif %} | Needful Things</title>
+  <!-- =====  SEO MATE  ===== -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="distribution" content="global">
+  <meta name="revisit-after" content="2 Days">
+  <meta name="robots" content="ALL">
+  <meta name="rating" content="8 YEARS">
+  <meta name="Language" content="en-us">
+  <meta name="GOOGLEBOT" content="NOARCHIVE">
+  <!-- =====  MOBILE SPECIFICATION  ===== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width">
+  <!-- =====  CSS  ===== -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/magnific-popup.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
+</head>
+
+<body>
+  <!-- =====  LODER  ===== -->
+  <div class="loder"></div>
+  <div class="wrapper">
+    <!-- =====  HEADER START  ===== -->
+    {% include 'header.html' %}
+    <!-- =====  HEADER END  ===== -->
+    <!-- =====  CONTAINER START  ===== -->
+    <div class="container mt_30">
+        <div class="row ">
+          <div class="col-sm-12 col-lg-12 mtb_20">
+            <!-- about  -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="about-text">
+                  <div class="about-heading-wrap">
+                    <h2 class="about-heading mb_20">Admin Panel </span></h2>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- =====  admin ===== -->
+            <div class="row">
+              
+                <div class="col-sm-12 col-lg-12 mtb_20">
+                    <h3 class="mtb_10">What would you like to do next?</h3>
+                    <div class="panel-group mt_20" id="accordion">
+                      <div class="panel panel-default pull-left">
+                        <div class="panel-heading">
+                          <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Users <i class="fa fa-caret-down"></i></a></h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse">
+                          <div class="panel-body">
+                            <form enctype="multipart/form-data" method="post" action="#">
+                                <div class="table-responsive">
+                                  <table class="table table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <td class="text-center">Username</td>
+                                        <td class="text-left">Name</td>
+                                        <td class="text-left">Job</td>
+                                        <td class="text-left">Company</td>
+                                        <td class="text-right">Email</td>
+                                        <td class="text-right">Delete User</td>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {% for user in userlist %}
+                                        <tr>
+                                            <td>{{user.username}}</td>
+                                            <td>{{user.name}}</td>
+                                            <td>{{user.job}}</td>
+                                            <td>{{user.company}}</td>
+                                            <td>{{user.mail}}</td>
+                                            <td>{% if user.role == 'user' %} <a href="{% url 'delete_user' user.username %}" onclick="return confirm('are you sure?')">Delete</a>{% endif %}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </form>
+
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default pull-left">
+                        <div class="panel-heading">
+                          <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Products <i class="fa fa-caret-down"></i></a> </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                          <div class="panel-body">
+                            <form enctype="multipart/form-data" method="post" action="#">
+                                <div class="table-responsive">
+                                  <table class="table table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <td class="text-center">View</td>
+                                        <td class="text-left">Price</td>
+                                        <td class="text-left">Category</td>
+                                        <td class="text-left">Seller</td>
+                                        <td class="text-right">Delete Product</td>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {% for product in productlist %}
+                                        <tr>
+                                            <td><a href="/product/{{ product|get_item }}">View {{product.name}}</a></td>
+                                            <td>${{product.price}}.99</td>
+                                            <td>{{product.category}}</td>
+                                            <td>{{product.seller}}</td>
+                                            <td><a href="{% url 'delete_product' product|get_item_id %}" onclick="return confirm('are you sure?')">Delete</a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </form>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default pull-left">
+                        <div class="panel-heading">
+                          <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Create a new user <i class="fa fa-caret-down"></i></a> </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                          <div class="panel-body">
+                            <form class="form-horizontal" method="post" action="/create_user.html">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                  <label for="username" class="control-label col-xs-4">Username</label> 
+                                  <div class="col-xs-8">
+                                    <div class="input-group">
+                                      <div class="input-group-addon">
+                                        <i class="fa fa-address-card"></i>
+                                      </div> 
+                                      <input id="username" name="username" type="text" class="form-control">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="password" class="control-label col-xs-4">Password</label> 
+                                  <div class="col-xs-8">
+                                    <div class="input-group">
+                                      <div class="input-group-addon">
+                                        <i class="fa fa-eye"></i>
+                                      </div> 
+                                      <input id="password" name="password" type="text" class="form-control">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="radio" class="control-label col-xs-4">Role</label> 
+                                  <div class="col-xs-8">
+                                    <label class="radio-inline">
+                                      <input type="radio" name="role" value="user">
+                                            User
+                                    </label>
+                                    <label class="radio-inline">
+                                      <input type="radio" name="role" value="admin">
+                                            Admin
+                                    </label>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="name" class="control-label col-xs-4">Name</label> 
+                                  <div class="col-xs-8">
+                                    <input id="name" name="name" type="text" class="form-control">
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="sex" class="control-label col-xs-4">Sex</label> 
+                                  <div class="col-xs-8">
+                                    <label class="radio-inline">
+                                      <input type="radio" name="sex" value="M">
+                                            Male
+                                    </label>
+                                    <label class="radio-inline">
+                                      <input type="radio" name="sex" value="F">
+                                            Female
+                                    </label>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="Job" class="control-label col-xs-4">Job</label> 
+                                  <div class="col-xs-8">
+                                    <input id="Job" name="Job" type="text" class="form-control">
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="company" class="control-label col-xs-4">Company</label> 
+                                  <div class="col-xs-8">
+                                    <input id="company" name="company" type="text" class="form-control">
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="ssn" class="control-label col-xs-4">SSN</label> 
+                                  <div class="col-xs-8">
+                                    <input id="ssn" name="ssn" type="text" class="form-control">
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="residence" class="control-label col-xs-4">Residence</label> 
+                                  <div class="col-xs-8">
+                                    <input id="residence" name="residence" type="text" class="form-control">
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="blood_group" class="control-label col-xs-4">Blood Group</label> 
+                                  <div class="col-xs-8">
+                                    <label class="radio-inline">
+                                      <input type="radio" name="blood_group" value="A+">
+                                            A+
+                                    </label>
+                                    <label class="radio-inline">
+                                      <input type="radio" name="blood_group" value="A-">
+                                            A-
+                                    </label>
+                                    <label class="radio-inline">
+                                      <input type="radio" name="blood_group" value="B+">
+                                            B+
+                                    </label>
+                                    <label class="radio-inline">
+                                      <input type="radio" name="blood_group" value="AB+">
+                                            AB+
+                                    </label>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="Address" class="control-label col-xs-4">Address</label> 
+                                  <div class="col-xs-8">
+                                    <input id="Address" name="Address" type="text" class="form-control">
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="mail" class="control-label col-xs-4">Email</label> 
+                                  <div class="col-xs-8">
+                                    <input id="mail" name="mail" type="text" class="form-control">
+                                  </div>
+                                </div> 
+                                <div class="form-group row">
+                                  <div class="col-xs-offset-4 col-xs-8">
+                                    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                                  </div>
+                                </div>
+                              </form>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default pull-left">
+                        <div class="panel-heading">
+                          <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Add new product <i class="fa fa-caret-down"></i></a> </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse">
+                          <div class="panel-body">
+                            <form class="form-horizontal" method="post" action="/create_product.html">
+                              {% csrf_token %}
+                              <div class="form-group">
+                                <label for="name" class="control-label col-xs-4">Name</label> 
+                                <div class="col-xs-8">
+                                  <input id="name" name="name" type="text" class="form-control">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="description" class="control-label col-xs-4">Description</label> 
+                                <div class="col-xs-8">
+                                  <input id="description" name="description" type="text" class="form-control">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="price" class="control-label col-xs-4">Price</label> 
+                                <div class="col-xs-8">
+                                  <div class="input-group">
+                                    <div class="input-group-addon">$</div> 
+                                    <input id="price" name="price" type="text" class="form-control">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="seller" class="control-label col-xs-4">Seller</label> 
+                                <div class="col-xs-8">
+                                  <input id="seller" name="seller" type="text" class="form-control">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="image" class="control-label col-xs-4">Image Url</label> 
+                                <div class="col-xs-8">
+                                  <input id="image" name="image" type="text" class="form-control">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="category" class="control-label col-xs-4">Category</label> 
+                                <div class="col-xs-8">
+                                  <select id="category" name="category" onchange="categoryChanged(this)" class="select form-control">
+                                    <option value="Clothings" selected>Clothings</option>
+                                    <option value="Snacks">Snacks</option>
+                                    <option value="Monitors">Monitors</option>
+                                    <option value="Computer Components">Computer Components</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-group clothings">
+                                <label for="additional_info_size" class="control-label col-xs-4">Size</label> 
+                                <div class="col-xs-8">
+                                  <label class="radio-inline">
+                                    <input type="radio" name="additional_info_size" value="XS">
+                                          XS
+                                  </label>
+                                  <label class="radio-inline">
+                                    <input type="radio" name="additional_info_size" value="S">
+                                          S
+                                  </label>
+                                  <label class="radio-inline">
+                                    <input type="radio" name="additional_info_size" value="M">
+                                          M
+                                  </label>
+                                  <label class="radio-inline">
+                                    <input type="radio" name="additional_info_size" value="L">
+                                          L
+                                  </label>
+                                  <label class="radio-inline">
+                                    <input type="radio" name="additional_info_size" value="XL">
+                                          XL
+                                  </label>
+                                  <label class="radio-inline">
+                                    <input type="radio" name="additional_info_size" value="XXL">
+                                          XXL
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="form-group clothings">
+                                <label for="additional_info_colour" class="control-label col-xs-4">Colour</label> 
+                                <div class="col-xs-8">
+                                  <input id="additional_info_colour" name="additional_info_colour" type="text" class="form-control">
+                                </div>
+                              </div>
+                              <div class="form-group computer-components" style="display: none;">
+                                <label for="additional_info_capacity" class="control-label col-xs-4">Capacity</label> 
+                                <div class="col-xs-8">
+                                  <div class="input-group">
+                                    <input id="additional_info_capacity" name="additional_info_capacity" type="text" class="form-control"> 
+                                    <div class="input-group-addon">GB</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group computer-components"  style="display: none;">
+                                <label for="additional_info_speed" class="control-label col-xs-4">Speed</label> 
+                                <div class="col-xs-8">
+                                  <div class="input-group">
+                                    <input id="additional_info_speed" name="additional_info_speed" type="text" class="form-control"> 
+                                    <div class="input-group-addon">GHz</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group monitors"  style="display: none;">
+                                <label for="additional_info_screen-size" class="control-label col-xs-4">Screen Size</label> 
+                                <div class="col-xs-8">
+                                  <input id="additional_info_screen-size" name="additional_info_screen-size" type="text" class="form-control">
+                                </div>
+                              </div>
+                              <div class="form-group monitors"  style="display: none;">
+                                <label for="additional_info_resolution" class="control-label col-xs-4">Resolution</label> 
+                                <div class="col-xs-8">
+                                  <input id="additional_info_resolution" name="additional_info_resolution" type="text" class="form-control">
+                                </div>
+                              </div>
+                              <div class="form-group monitors"  style="display: none;">
+                                <label for="additional_info_refresh-rate" class="control-label col-xs-4">Refresh Rate</label> 
+                                <div class="col-xs-8">
+                                  <div class="input-group">
+                                    <input id="additional_info_refresh-rate" name="additional_info_refresh-rate" type="text" class="form-control"> 
+                                    <div class="input-group-addon">Hz</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group snacks"  style="display: none;">
+                                <label for="additional_info_calories" class="control-label col-xs-4">Calories</label> 
+                                <div class="col-xs-8">
+                                  <div class="input-group">
+                                    <input id="additional_info_calories" name="additional_info_calories" type="text" class="form-control"> 
+                                    <div class="input-group-addon">kcal</div>
+                                  </div>
+                                </div>
+                              </div> 
+                              <div class="form-group row">
+                                <div class="col-xs-offset-4 col-xs-8">
+                                  <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                              </div>
+                            </form>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4 col-sm-offset-8">
+                        <table class="table table-bordered">
+                          <tbody>
+                            <tr>
+                              <td class="text-right"><strong>Sub-Total:</strong></td>
+                              <td class="text-right">$210.00</td>
+                            </tr>
+                            <tr>
+                              <td class="text-right"><strong>Eco Tax (-2.00):</strong></td>
+                              <td class="text-right">$2.00</td>
+                            </tr>
+                            <tr>
+                              <td class="text-right"><strong>VAT (20%):</strong></td>
+                              <td class="text-right">$42.00</td>
+                            </tr>
+                            <tr>
+                              <td class="text-right"><strong>Total:</strong></td>
+                              <td class="text-right">$254.00</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <form action="index.html">
+                      <input class="btn pull-left mt_30" type="submit" value="Continue Shopping" />
+                    </form>
+                    <form action="checkout.html">
+                      <input class="btn pull-right mt_30" type="submit" value="Checkout" />
+                    </form>
+                  </div>
+
+
+            </div>
+            <!-- =====  end  ===== -->
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- =====  CONTAINER END  ===== -->
+    <!-- =====  FOOTER START  ===== -->
+    <div class="footer">
+      <div class="footer-bottom mt_60 ptb_20">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="social_icon">
+                <ul>
+                  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="#"><i class="fa fa-google"></i></a></li>
+                  <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="copyright-part text-center">@ 2017 All Rights Reserved Darklook</div>
+            </div>
+            <div class="col-sm-4">
+              <div class="payment-icon text-right">
+                <ul>
+                  <li><i class="fa fa-cc-paypal "></i></li>
+                  <li><i class="fa fa-cc-visa"></i></li>
+                  <li><i class="fa fa-cc-discover"></i></li>
+                  <li><i class="fa fa-cc-mastercard"></i></li>
+                  <li><i class="fa fa-cc-amex"></i></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- =====  FOOTER END  ===== -->
+  </div>
+  <a id="scrollup"></a>
+  <script src="{% static 'js/jQuery_v3.1.1.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+  <script src="{% static 'js/jquery-ui.js' %}"></script>
+  <script>
+    function categoryChanged(category) {
+      var selVal = category.value;
+      if (selVal == 'Snacks'){
+        $('.snacks').show();
+        $('.monitors').hide();
+        $('.computer-components').hide();
+        $('.clothings').hide();
+      }
+      else if (selVal == 'Monitors'){
+        $('.monitors').show();
+        $('.snacks').hide();
+        $('.computer-components').hide();
+        $('.clothings').hide();
+        
+      } else if (selVal == 'Computer Components'){
+        $('.snacks').hide();
+        $('.monitors').hide();
+        $('.computer-components').show();
+        $('.clothings').hide();
+      } else if (selVal == 'Clothings'){
+        $('.monitors').hide();
+        $('.snacks').hide();
+        $('.computer-components').hide();
+        $('.clothings').show();
+      }
+    }
+  </script>
+  <script>
+  $(function() {
+    $("#slider-range").slider({
+      range: true,
+      min: 0,
+      max: 500,
+      values: [75, 300],
+      slide: function(event, ui) {
+        $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+      }
+    });
+    $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+      " - $" + $("#slider-range").slider("values", 1));
+  });
+  </script>
+</body>
+
+</html>
