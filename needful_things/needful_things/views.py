@@ -233,7 +233,6 @@ def login_action(request):
     context['user'] = user
     context['username'] = username
 
-    print(user['role'])
     # set session
     request.session['username'] = username
     request.session['role'] = user['role']
