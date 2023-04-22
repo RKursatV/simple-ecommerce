@@ -31,7 +31,8 @@ def home(request):
 
 
     products = []
-    if name := request.GET.get('category'):
+    name = request.GET.get('category')
+    if name:
         context["current_category"] = name
         single_category = db.find({"category": name})
         if single_category:
