@@ -33,6 +33,34 @@ https://e-commerce-20ct.onrender.com/create_product.html
 3. Click on `Login` button
 4. You can visit admin panel by clicking on `admin` button on the top of the website or by visiting https://e-commerce-20ct.onrender.com/admin.html
 
+## Populating the Database
+
+I have created a script that populates the database with some dummy data. You can run it uncommenting last 4 lines in the `utils.py` file.
+
+## How to Run Locally
+
+1. Clone the repository
+2. Create a virtual environment
+3. Install the requirements
+4. Do migrations
+5. Create a prod.env file in the root directory of the project and add the following lines to it:
+```bash
+DEBUG=on
+DATABASE_URL=mongodb+srv://...
+```
+6. Run the server
+
+```bash
+git clone
+cd e-commerce
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+```
+
 ## Used Technologies
 
 - HTML

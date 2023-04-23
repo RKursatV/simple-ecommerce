@@ -26,7 +26,6 @@ environ.Env.read_env(os.path.join(BASE_DIR, 'prod.env'))
 
 
 DATABASE_URL = env('DATABASE_URL')
-API_NINJAS_KEY = env('API_NINJAS_KEY')
 DEBUG = env('DEBUG')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
