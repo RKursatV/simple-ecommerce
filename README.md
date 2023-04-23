@@ -1,10 +1,6 @@
 # Needful Things
 
-/* Your README can include: how to login as a regular user and the admin user, why you chose the
-programming language you did, which frameworks you have chosen and why, a user guide about how
-to use your application, as well as other points you would like to mention. */
-
-Needful Things is a simple e-commerce website. It is a Django application that uses MongoDB as the main database and it also uses a local SQLite database to keep sessions. It is deployed on Render at https://e-commerce-20ct.onrender.com/
+Needful Things is a simple e-commerce website. It is a Django application that uses MongoDB as the main database and it also uses a local SQLite database to keep sessions. It is deployed on Render at https://e-commerce-20ct.onrender.com/index.html
 
 It's frontend is developed using HTML, CSS and JavaScript on top of [DarkLook Theme](https://github.com/DarkLookTheme/DarkLookTheme.github.io). It uses Bootstrap for styling and jQuery for some of the functionalities.
 
