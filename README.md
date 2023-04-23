@@ -1,16 +1,27 @@
 # Needful Things
 
-This e-commerce website consists following urls on https://e-commerce-20ct.onrender.com/:
+/* Your README can include: how to login as a regular user and the admin user, why you chose the
+programming language you did, which frameworks you have chosen and why, a user guide about how
+to use your application, as well as other points you would like to mention. */
+
+Needful Things is a simple e-commerce website. It is a Django application that uses MongoDB as the main database and it also uses a local SQLite database to keep sessions. It is deployed on Render at https://e-commerce-20ct.onrender.com/
+
+It's frontend is developed using HTML, CSS and JavaScript on top of [DarkLook Theme](https://github.com/DarkLookTheme/DarkLookTheme.github.io). It uses Bootstrap for styling and jQuery for some of the functionalities.
+
+All the urls and endpoints used by the system are listed below:
 
 ```
 https://e-commerce-20ct.onrender.com/index.html
 https://e-commerce-20ct.onrender.com/product/<str:product_id>/<str:product_name>
 https://e-commerce-20ct.onrender.com/user/<str:username>
 https://e-commerce-20ct.onrender.com/login.html
+https://e-commerce-20ct.onrender.com/login-action.html
 https://e-commerce-20ct.onrender.com/logout.html
 https://e-commerce-20ct.onrender.com/admin.html
 https://e-commerce-20ct.onrender.com/delete_user/<str:username>
 https://e-commerce-20ct.onrender.com/delete_product/<str:product_id>
+https://e-commerce-20ct.onrender.com/create_user.html
+https://e-commerce-20ct.onrender.com/create_product.html
 ```
 
 ## How to Login
@@ -31,7 +42,8 @@ https://e-commerce-20ct.onrender.com/delete_product/<str:product_id>
 - HTML
 - CSS
 - JavaScript
+- Bootstrap
+- jQuery
 - Django
 - MongoDB
-
-
+- SQLite
