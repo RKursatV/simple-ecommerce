@@ -21,7 +21,7 @@ Django
 django-browser-reload==1.7.0
 django-environ==0.10.0
 djangorestframework==3.14.0
-dnspython==2.3.0
+dnspython==2.6.1
 dulwich==0.21.3
 executing==1.2.0
 Faker==18.4.0
